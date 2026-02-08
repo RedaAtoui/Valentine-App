@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Final</title>
+  <style>
+    :root {
+      --bg: #fff7f9;
+      --card: #ffffff;
+      --ink: #2a2a2a;
+      --accent: #7b1126;
+      --muted: #7a7a7a;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+      background: radial-gradient(circle at bottom left, #ffe1ea, var(--bg));
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      padding: 32px;
+      max-width: 600px;
+      width: 100%;
+      border: 2px solid #ffe6ee;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 24px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .confetti {
+      position: absolute;
+      top: -10px;
+      width: 10px;
+      height: 14px;
+      opacity: 0.9;
+      animation: fall 3.2s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>{{ message }}</h1>
+    <p>Confetti approved. Hearts engaged.</p>
+  </div>
+
+  <script>
+    const colors = ["#7b1126", "#a3152f", "#c41f3d", "#f4c2c2", "#ffd1dc"];
+    const count = 60;
+
+    for (let i = 0; i < count; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDelay = (Math.random() * 2) + "s";
+      confetti.style.animationDuration = (2.4 + Math.random() * 2) + "s";
+      confetti.style.opacity = (0.6 + Math.random() * 0.4);
+      confetti.style.transform = `translateY(-10vh) rotate(${Math.random() * 360}deg)`;
+      confetti.style.borderRadius = Math.random() > 0.5 ? "2px" : "50%";
+      document.body.appendChild(confetti);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Result</title>
+  <style>
+    :root {
+      --bg: #fff7f9;
+      --card: #ffffff;
+      --ink: #2a2a2a;
+      --accent: #7b1126;
+      --ok: #28a745;
+      --muted: #7a7a7a;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+      background: radial-gradient(circle at top right, #ffe1ea, var(--bg));
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      padding: 32px;
+      max-width: 600px;
+      width: 100%;
+      border: 2px solid #ffe6ee;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: white;
+      background: {{ '#28a745' if success else '#7b1126' }};
+    }
+
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 24px;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+      color: var(--muted);
+    }
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--accent);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .btn {
+      border: none;
+      background: var(--accent);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn.alt {
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    {% if success %}
+      <div class="badge">Approved</div>
+      <h1>{{ message }}</h1>
+      <p>Choose wisely. The cat is still taking notes.</p>
+      <form method="POST" action="/answer" class="actions">
+        <button class="btn" type="submit" name="choice" value="yes">Yes</button>
+        <button class="btn alt" type="submit" name="choice" value="akid">AKID</button>
+      </form>
+    {% else %}
+      <div class="badge">Denied</div>
+      <h1>{{ message }}</h1>
+      <p>Try again. The cat is smug.</p>
+      <a href="/">Try again</a>
+    {% endif %}
+  </div>
+</body>
+</html>
